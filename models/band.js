@@ -27,14 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    available_start_time: {
-      type: DataTypes.DATE,
+    members: {
+      type: DataTypes.SMALLINT,
       allowNull: false
-    },
-    end_time: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
+    }
   }, {
     sequelize,
     modelName: 'Band',
