@@ -20,7 +20,7 @@ module.exports = {
     );   
   },
   
-
+// to undo migration
   async down (queryInterface, Sequelize) {
     /**
      * Add reverting commands here.
