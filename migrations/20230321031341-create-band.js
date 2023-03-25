@@ -17,6 +17,14 @@ module.exports = {
         allowNull: false
       },
       members: {
+        type: Sequelize.SMALLINT,
+        allowNull: false
+      },
+      available_start_time: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      end_time: {
         type: Sequelize.DATE,
         allowNull: false
       }

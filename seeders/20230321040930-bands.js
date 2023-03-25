@@ -13,20 +13,26 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('bands', [{
-       band_id: 4,
+       band_id: 1,
        name: 'Linkin Park',
        genre:'Rock Band',
-       members: 7
+       members: 7,
+       available_start_time: '13:00:00',
+       end_time: '14:00:00'
     }, {
-      band_id: 5, 
+      band_id: 2, 
       name: 'Queen',
       genre:'R&B / Soul',
-      members: 4 
+      members: 4,
+      available_start_time: '11:30:00',
+      end_time: '12:10:00'
       }, {
-      band_id: 6,
+      band_id: 3,
       name: 'AC/DC',
       genre:'Rock B',
-      members: 6 
+      members: 6,
+      available_start_time: '20:00:00',
+      end_time: '21:30:00'
      }
      
      ], {});
