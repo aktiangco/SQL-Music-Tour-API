@@ -1,8 +1,9 @@
 // DEPENDENCIES
 const events = require('express').Router()
 const db = require('../models')
-const { Event } = db
+const { Event, Meet_Greet, Set_Time, Stage, Band, Stage_Event } = db
 const { Op } = require('sequelize') 
+const band = require('../models/band')
 
 // FIND ALL EVENTS
 events.get('/', async (req, res) => {
@@ -11,7 +12,7 @@ events.get('/', async (req, res) => {
             attributes: [['name', 'Event Name'], 'date',['start_time', 'Start Time'] ],
             // order: [['start_time', 'ASC']],
             where: {
-                name: {[Op.like]: `%${req.query.nam ? req.query.name : ''}%`}
+                name: {[Op.like]: `%${req.query.name ? req.query.name : ''}%`}
             }
         })
         res.status(200).json(foundEvents)
@@ -21,10 +22,39 @@ events.get('/', async (req, res) => {
 })
 
 // FIND A SPECIFIC EVENT
-events.get('/:id', async (req, res) => {
+events.get('/:name', async (req, res) => {
     try {
         const foundEvent = await Event.findOne({
-            where: { event_id: req.params.id }
+            where: {
+                event_name: req.params.name
+            },
+            include: [
+                {
+                    model: Meet_Greet,
+                    as: "meet_greets",
+                    include: {
+                        model: Band,
+                        as: "band",
+                    }
+                }, {
+                    model: Set_Time,
+                    as: "set_times",
+                    include: [
+                        {
+                        model: Band,
+                        as: "bands",                       
+                        }, {
+                            model: Stage,
+                            as: "stages"
+                        }
+                    ]
+                }, 
+                {
+                    model: Stage,
+                    as: "stages",
+                    through: Stage_Event
+                }
+            ]
         })
         res.status(200).json(foundEvent)
     } catch (error) {
