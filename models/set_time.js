@@ -15,13 +15,13 @@ module.exports = (sequelize, DataTypes) => {
            Set_Time.belongsTo(Band, {
             foreignKey: "band_id",
             as: "band"
-          })
+          }),
     
           // event
           Set_Time.belongsTo(Event, {
             foreignKey: "event_id",
             as: "event"
-          })
+          }),
     
           // stage 
           Set_Time.belongsTo(Stage, {

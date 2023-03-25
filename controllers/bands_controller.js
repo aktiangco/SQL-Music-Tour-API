@@ -12,7 +12,7 @@ bands.get('/', async (req, res) => {
             attributes: [['name', 'Band Name'], 'genre',['available_start_time', 'Start Time'] ],
             order: [['available_start_time', 'ASC']],
             where: {
-                name: {[Op.like]: `%${req.query.nam ? req.query.name : ''}%`}
+                name: {[Op.like]: `%${req.query.name ? req.query.name : ''}%`}
             }
         })
         res.status(200).json(foundBands)
@@ -34,14 +34,20 @@ bands.get('/:name', async (req, res) => {
                     as: "meet_greets",
                     include: {
                         model: Event,
-                        as: "event"
+                        as: "event",
+                        where: {
+                            name: {[Op.like]: `%${req.query.event ? req.query.event : ''}%`}
+                        }
                     }
                 }, {
                     model: Set_Time,
                     as: "set_times",
                     include: {
                         model: Event,
-                        as: "event"
+                        as: "event",
+                        where: {
+                            name: {[Op.like]: `%${req.query.event ? req.query.event : ''}%`}
+                        }
                     }
                 }
             ]
